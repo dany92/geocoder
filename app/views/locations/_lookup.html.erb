@@ -1,0 +1,40 @@
+<div id="location-lookup">
+	<h3>Search for locations</h3>
+	<%= form_tag find_locations_path, remote: true, method: :get, id: 'location-lookup-form' do %>
+		<div class= "form-group row no-padding text-center col-md-12">
+			<div class = "col-md-10">
+				<%= text_field_tag :currentLocation, params[:currentLocation], 
+				placeholder: "please enter your current location", autofocus: true,
+				class: "form-control search-box input-lg" %>
+			</div>	
+			<div class= "col-md-2">
+				<%= button_tag(type: :submit, class: "btn btn-lg btn-success") do %>
+					<i class="fa fa-search"></i> Look up places
+				<% end %>
+			</div>
+		</div>
+	<% end %>
+<% if @locations %>
+	<% if @locations.size > 0 %> 
+		<div id="location-lookup-results" class="well results-block col-md-10">
+			<table class="search-results-table col-md-12" >
+				<tbody>
+					<% @locations.each do |location| %>
+						<tr>
+							<td><strong>Street:</strong> <%= location.street %></td>
+							<td><strong>Logitude:</strong> <%= location.longitude %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	<% else %>
+		<p class = "lead col-md-12">
+			No match for this search criteria
+		</p>
+	<% end %>
+<% end %>
+
+<div id="location-lookup-errors"></div>
+
+</div>

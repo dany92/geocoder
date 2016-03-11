@@ -1,0 +1,11 @@
+class CreateBusinesses < ActiveRecord::Migration
+  def change
+    create_table :businesses do |t|
+      t.string :name
+      t.string :owner
+      t.string :category
+
+      t.timestamps
+    end
+  end
+end

@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<h1 id="VenueName">Listing Businesses</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Owner</th>
+      <th>Type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @businesses.each do |business| %>
+      <tr>
+        <td class = "name"><%= business.name %></td>
+        <td><%= business.owner %></td>
+        <td><%= business.category %></td>
+        <td><%= link_to 'Show', business %></td>
+        <td><%= link_to 'Edit', edit_business_path(business) %></td>
+        <td><%= link_to 'Destroy', business, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  
+</table>
+
+<br>
+
+<div id="pasted" class = "well col-md-6"></div>
+
+<%= link_to 'New Business', new_business_path %>
+
+
+<script>
+  $(document).ready(function(){
+    $('#VenueName').click(function(){
+      alert($(this).text());
+      $('#pasted').html("<%= render partial: 'hours' %>").attr("h2");
+
+    });
+
+    $('.name').click(function(){
+      alert($(this).html());
+    });
+  })
+</script>
+

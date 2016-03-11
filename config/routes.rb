@@ -1,4 +1,15 @@
 Rails.application.routes.draw do
+  resources :djs
+  resources :business_hours, except: [:show, :edit, :update]
+  resources :businesses
+  resources :locations
+  root 'welcome#index'
+  get 'search_locations', to: 'locations#search'
+  get 'find_locations', to: 'locations#find'
+  get 'my_portfolio', to: 'locations#my_portfolio'
+  get 'results', to: 'locations#result'
+  get 'businesses/:id/edit_operations', to: 'businesses#edit_operations', as: "edit_operations"
+  post 'businesses/:id/update_operations', to: 'businesses#update_operations', as: "update_operations" 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

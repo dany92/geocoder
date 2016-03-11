@@ -1,0 +1,53 @@
+<div id="location-lookup">
+<h3>Search for locations</h3>
+	<%= form_tag results_path, remote: true, method: :get, id: 'location-lookup-form' do %>
+<% if @locations %>
+	<% if @locations.size > 0 %> 
+		<div id="results" class="well results-block col-md-10">
+			<table class="search-results-table col-md-12" >
+				<tbody>
+					<% @locations.each do |location| %>
+						<tr>
+							<td><strong>Street:</strong> <%= location.street %></td>
+							<td><strong>Logitude:</strong> <%= location.longitude %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	<% else %>
+		<p class = "lead col-md-12">
+			No match for this search criteria
+		</p>
+	<% end %>
+<% end %>
+
+<div class= "col-md-2">
+				<%= button_tag(type: :submit, class: "btn btn-lg btn-success") do %>
+					<i class="fa fa-search"></i> Look up places
+				<% end %>
+			</div>
+
+			<% end %>
+			</div>
+
+<script>
+	var init_location_lookup;
+
+init_location_lookup = function(){
+	$('#location-lookup-form').on('ajax:success', function(event, data, status){
+		$(".well results-block col-md-10").replaceWith(data);
+		init_location_lookup();
+	});
+
+	$('#location-lookup-form').on('ajax:error', function(event, xhr, status, error){
+		$('#location-lookup-results').replaceWith('  ');
+		$('#location-lookup-errors').replaceWith('Location was not found');
+	});
+}
+
+
+$(document).ready(function(){
+	init_location_lookup()
+})
+</script>

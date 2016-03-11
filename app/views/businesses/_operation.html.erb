@@ -1,0 +1,31 @@
+<!-- show and edit page will render this partial
+if @business.hours.each already exists, then render that, but if not exists, create 7 days hours and @business.hours << -->
+
+<%= form_tag add_operations_path, method: :get do %>
+	<% @business.hours.each do |f| %>
+		<div class= "form-group row no-padding text-center col-md-12">
+			<div class="field">
+				<%= label_tag "Weekday" %><br>
+				<%= text_field_tag params[:weekday] %>
+			</div>
+			<div class="field">
+				<%= label_tag "Open hour" %><br>
+				<%= text_field_tag params[:openhour] %>
+			</div>
+			<div class="field">
+		    	<%= label_tag "Open min" %><br>
+			    <%= text_field_tag params[:openmin] %>
+			</div>
+		  	<div class="field">
+				<%= label_tag "Close hour" %><br>
+			    <%= text_field_tag params[:closehour] %>
+			</div>
+			<div class="field">
+			    <%= label_tag "Close min" %><br>
+			    <%= text_field_tag params[:closemin] %>
+			</div>
+	  	</div>
+  	<% end %>
+<% end %>
+
+<!-- submit button will be on the edit page. this is just a partial -->

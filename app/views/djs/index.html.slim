@@ -1,0 +1,23 @@
+h1 Listing djs
+
+table.table.table-striped
+  thead
+    tr
+      th Name
+      th Genre
+      th
+      th
+      th
+
+  tbody
+    - @djs.each do |dj|
+      tr
+        td = dj.name
+        td = dj.genre
+        td = link_to 'Show', dj
+        td = link_to 'Edit', edit_dj_path(dj)
+        td = link_to 'Destroy', dj, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Dj', new_dj_path
